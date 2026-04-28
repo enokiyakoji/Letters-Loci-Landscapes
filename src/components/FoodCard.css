@@ -1,0 +1,192 @@
+/* ===== 遮罩层 ===== */
+.card-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+
+.card-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== 毛玻璃卡片 ===== */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 62vh;
+  margin: 0 16px 32px;
+  padding: 28px 28px 24px;
+  border-radius: var(--radius-lg);
+  background: rgba(253, 251, 247, 0.82);
+  backdrop-filter: blur(24px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(110%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-float);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.45s var(--ease-spring), opacity 0.35s var(--ease-out);
+  opacity: 0;
+}
+
+.card--visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ===== 关闭按钮 ===== */
+.card-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.card-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text);
+}
+
+/* ===== 标签 ===== */
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.card-tag {
+  font-size: 11px;
+  color: var(--color-accent-blue);
+  background: rgba(163, 176, 194, 0.12);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* ===== 食物名 ===== */
+.card-food {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+/* ===== 书名 & 作者 ===== */
+.card-book-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.card-book {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.card-author-sep {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.card-author {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.03em;
+}
+
+/* ===== 地名 ===== */
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+
+.card-location svg {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* ===== 分隔线 ===== */
+.card-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-divider);
+  margin-bottom: 18px;
+}
+
+/* ===== 原文引用 ===== */
+.card-excerpt {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-text);
+  position: relative;
+  padding-left: 18px;
+  letter-spacing: 0.02em;
+}
+
+.card-quote-mark {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--color-accent);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+/* ===== 底部渐变 ===== */
+.card-bottom-fade {
+  height: 20px;
+  width: 100%;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 640px) {
+  .card {
+    max-width: 100%;
+    margin: 0 12px 24px;
+    padding: 24px 20px 20px;
+    max-height: 55vh;
+  }
+
+  .card-food {
+    font-size: 24px;
+  }
+
+  .card-excerpt {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+}

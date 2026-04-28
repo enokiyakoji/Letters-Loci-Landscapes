@@ -1,0 +1,423 @@
+/* ===== 管理面板覆盖层 ===== */
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+/* ===== 登录卡片 ===== */
+.admin-login-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 40px 32px 32px;
+  border-radius: var(--radius-lg);
+  background: rgba(253, 251, 247, 0.96);
+  backdrop-filter: blur(24px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(110%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-float);
+  animation: admin-card-in 0.4s var(--ease-spring);
+}
+
+@keyframes admin-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.admin-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.admin-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text);
+}
+
+.admin-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.admin-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-login-form input {
+  padding: 10px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-sm);
+  background: rgba(253, 251, 247, 0.6);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+}
+
+.admin-login-form input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(163, 181, 166, 0.15);
+}
+
+.admin-login-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+/* ===== 主面板 ===== */
+.admin-panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  background: rgba(253, 251, 247, 0.96);
+  backdrop-filter: blur(24px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(110%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-float);
+  animation: admin-card-in 0.4s var(--ease-spring);
+  overflow: hidden;
+}
+
+/* ===== 头部 ===== */
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.admin-header .admin-title {
+  flex: 1;
+  margin: 0;
+  font-size: 18px;
+}
+
+.admin-back,
+.admin-logout {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-logout {
+  width: auto;
+  padding: 0 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+.admin-back:hover,
+.admin-logout:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text);
+}
+
+/* ===== 标签页 ===== */
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.admin-tab {
+  padding: 12px 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.admin-tab--active {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+/* ===== 刷新 ===== */
+.admin-refresh {
+  margin: 12px 24px;
+  padding: 6px 16px;
+  align-self: flex-start;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.admin-refresh:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text);
+}
+
+/* ===== 列表 ===== */
+.admin-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 24px;
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 48px 20px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.admin-error {
+  margin: 0 24px 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(211, 90, 74, 0.08);
+  color: #D35A4A;
+  font-size: 13px;
+}
+
+/* ===== 投稿条目 ===== */
+.admin-item {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  padding: 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(253, 251, 247, 0.5);
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.admin-item--approved {
+  border-left: 3px solid #8DA090;
+}
+
+.admin-item--rejected {
+  border-left: 3px solid #D35A4A;
+  opacity: 0.6;
+}
+
+.admin-item--pending {
+  border-left: 3px solid var(--color-accent-blue);
+}
+
+.admin-item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-item-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-item-food {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.admin-item-book {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.admin-item-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.admin-item-excerpt {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.admin-item-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.admin-item-tag {
+  font-size: 10px;
+  color: var(--color-accent-blue);
+  background: rgba(163, 176, 194, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.admin-item-meta {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* ===== 操作按钮 ===== */
+.admin-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-action {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.admin-action--approve {
+  background: rgba(141, 160, 144, 0.12);
+  color: #5C7A5E;
+}
+
+.admin-action--approve:hover {
+  background: rgba(141, 160, 144, 0.25);
+}
+
+.admin-action--reject {
+  background: rgba(211, 90, 74, 0.08);
+  color: #B54A3E;
+}
+
+.admin-action--reject:hover {
+  background: rgba(211, 90, 74, 0.18);
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 640px) {
+  .admin-panel {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .admin-item {
+    flex-direction: column;
+  }
+
+  .admin-item-actions {
+    flex-direction: row;
+  }
+
+  .admin-tabs {
+    padding: 0 12px;
+  }
+
+  .admin-tab {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .admin-list {
+    padding: 0 12px 12px;
+  }
+}
