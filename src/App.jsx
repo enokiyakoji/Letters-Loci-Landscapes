@@ -14,10 +14,14 @@ function App() {
   const [showSubmitForm, setShowSubmitForm] = useState(false);
   const [pickedCoords, setPickedCoords] = useState(null);
   const [allFoods, setAllFoods] = useState(builtinData);
+  const [hasBackend, setHasBackend] = useState(false);
 
   useEffect(() => {
     fetchFoods()
-      .then((data) => setAllFoods(data))
+      .then((data) => {
+        setAllFoods(data);
+        setHasBackend(true);
+      })
       .catch(() => setAllFoods(builtinData));
   }, []);
 
@@ -67,27 +71,31 @@ function App() {
               selectedId={selectedFood?.id}
             />
 
-            {/* 浮动投稿按钮 */}
-            <button
-              className="fab"
-              onClick={handleOpenSubmitForm}
-              aria-label="投稿"
-              title="贡献美食记忆"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
+            {/* 浮动投稿按钮（仅后端可用时） */}
+            {hasBackend && (
+              <button
+                className="fab"
+                onClick={handleOpenSubmitForm}
+                aria-label="投稿"
+                title="贡献美食记忆"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            )}
 
-            {/* 管理入口 */}
-            <button
-              className="admin-entry"
-              onClick={() => setView('admin')}
-              aria-label="管理"
-            >
-              管理
-            </button>
+            {/* 管理入口（仅后端可用时） */}
+            {hasBackend && (
+              <button
+                className="admin-entry"
+                onClick={() => setView('admin')}
+                aria-label="管理"
+              >
+                管理
+              </button>
+            )}
 
             {/* 底部信息 */}
             <div className="app-footer-info">
@@ -96,7 +104,7 @@ function App() {
           </>
         )}
 
-        {view === 'admin' && (
+        {hasBackend && view === 'admin' && (
           <AdminPanel onBack={() => setView('map')} />
         )}
       </main>
@@ -108,12 +116,14 @@ function App() {
         onClose={handleCloseCard}
       />
 
-      {/* 投稿表单 */}
-      <SubmitForm
-        isOpen={showSubmitForm}
-        onClose={handleCloseSubmitForm}
-        pickedCoords={pickedCoords}
-      />
+      {/* 投稿表单（仅后端可用时） */}
+      {hasBackend && (
+        <SubmitForm
+          isOpen={showSubmitForm}
+          onClose={handleCloseSubmitForm}
+          pickedCoords={pickedCoords}
+        />
+      )}
     </div>
   );
 }
