@@ -89,6 +89,7 @@
 
 .submit-panel-row > .submit-panel-field {
   flex: 1;
+  min-width: 0;
 }
 
 .submit-panel-field {
@@ -107,6 +108,7 @@
 
 .submit-panel-field input,
 .submit-panel-field textarea {
+  width: 100%;
   padding: 9px 12px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-sm);
