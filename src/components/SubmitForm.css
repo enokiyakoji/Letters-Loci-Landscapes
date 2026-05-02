@@ -1,39 +1,29 @@
-.submit-overlay {
+/* ===== 右下角提交面板 ===== */
+.submit-panel {
   position: fixed;
-  inset: 0;
-  z-index: 3000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  padding: 20px;
-}
-
-.submit-card {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
+  bottom: 104px;
+  right: 28px;
+  z-index: 2000;
+  width: 340px;
+  max-width: calc(100vw - 40px);
+  padding: 24px 22px 20px;
   border-radius: var(--radius-lg);
-  background: rgba(253, 251, 247, 0.95);
+  background: rgba(253, 251, 247, 0.88);
   backdrop-filter: blur(24px) saturate(110%);
   -webkit-backdrop-filter: blur(24px) saturate(110%);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: var(--shadow-float);
-  animation: submit-card-in 0.4s var(--ease-spring);
+  animation: submit-panel-in 0.45s var(--ease-spring);
 }
 
-.submit-scroll {
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 32px 28px 28px;
+.submit-panel--closing {
+  animation: submit-panel-out 0.3s var(--ease-out) forwards;
 }
 
-@keyframes submit-card-in {
+@keyframes submit-panel-in {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.94);
+    transform: translateY(16px) scale(0.94);
   }
   to {
     opacity: 1;
@@ -41,12 +31,24 @@
   }
 }
 
-.submit-close {
+@keyframes submit-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+
+/* ===== 关闭按钮 ===== */
+.submit-panel-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
   border: none;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.04);
@@ -58,157 +60,150 @@
   transition: all 0.2s ease;
 }
 
-.submit-close:hover {
+.submit-panel-close:hover {
   background: rgba(0, 0, 0, 0.08);
   color: var(--color-text);
 }
 
-.submit-title {
+/* ===== 标题 ===== */
+.submit-panel-title {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: 0.04em;
-  margin-bottom: 4px;
-}
-
-.submit-desc {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  letter-spacing: 0.02em;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 /* ===== 表单 ===== */
-.submit-form {
+.submit-panel-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.submit-row {
+.submit-panel-row {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
-.submit-row > .submit-field {
+.submit-panel-row > .submit-panel-field {
   flex: 1;
 }
 
-.submit-field {
+.submit-panel-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
-.submit-field label {
-  font-size: 12px;
+.submit-panel-field label {
+  font-size: 11px;
   font-weight: 600;
   color: var(--color-text-secondary);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.submit-field input,
-.submit-field textarea {
-  padding: 10px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.submit-panel-field input,
+.submit-panel-field textarea {
+  padding: 9px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-sm);
-  background: rgba(253, 251, 247, 0.6);
+  background: rgba(253, 251, 247, 0.5);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--color-text);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   resize: vertical;
 }
 
-.submit-field input:focus,
-.submit-field textarea:focus {
+.submit-panel-field input:focus,
+.submit-panel-field textarea:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(163, 181, 166, 0.15);
+  box-shadow: 0 0 0 3px rgba(163, 181, 166, 0.12);
 }
 
-.submit-field input::placeholder,
-.submit-field textarea::placeholder {
-  color: rgba(0, 0, 0, 0.2);
+.submit-panel-field input::placeholder,
+.submit-panel-field textarea::placeholder {
+  color: rgba(0, 0, 0, 0.18);
 }
 
-.submit-hint {
-  font-size: 11px;
-  color: var(--color-accent-blue);
-  letter-spacing: 0.02em;
-  margin-top: -8px;
-}
-
-.submit-btn {
-  margin-top: 8px;
-  padding: 12px 24px;
+/* ===== 提交按钮 ===== */
+.submit-panel-btn {
+  margin-top: 4px;
+  padding: 11px 20px;
   border: none;
   border-radius: var(--radius-sm);
   background: var(--color-accent);
   color: #fff;
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s var(--ease-out);
 }
 
-.submit-btn:hover {
+.submit-panel-btn:hover {
   background: #8DA090;
   transform: translateY(-1px);
   box-shadow: var(--shadow-soft);
 }
 
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
+.submit-panel-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
-.submit-error {
-  padding: 10px 14px;
+.submit-panel-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== 错误 ===== */
+.submit-panel-error {
+  padding: 9px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(211, 90, 74, 0.08);
-  color: #D35A4A;
-  font-size: 13px;
+  background: rgba(211, 90, 74, 0.07);
+  color: #C04A3E;
+  font-size: 12px;
   letter-spacing: 0.02em;
+  line-height: 1.5;
 }
 
 /* ===== 成功状态 ===== */
-.submit-success {
+.submit-panel-success {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 40px 20px;
+  gap: 10px;
+  padding: 18px 12px 8px;
 }
 
-.submit-success p {
+.submit-panel-success p {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--color-text);
   letter-spacing: 0.04em;
 }
 
+.submit-panel-success span {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+}
+
 /* ===== 响应式 ===== */
 @media (max-width: 640px) {
-  .submit-card {
-    max-width: 100%;
-  }
-
-  .submit-scroll {
-    padding: 24px 18px 20px;
-  }
-
-  .submit-title {
-    font-size: 19px;
-  }
-
-  .submit-row {
-    flex-direction: column;
-    gap: 16px;
+  .submit-panel {
+    bottom: 88px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
   }
 }

@@ -33,11 +33,10 @@ const MAP_TILES = {
   },
 };
 
-function MapView({ data, onMarkerClick, onMapClick, isCoordPicking, selectedId }) {
+function MapView({ data, onMarkerClick, selectedId }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef({});
-  const cursorMarkerRef = useRef(null);
 
   // 初始化地图
   useEffect(() => {
@@ -88,14 +87,8 @@ function MapView({ data, onMarkerClick, onMapClick, isCoordPicking, selectedId }
           opacity: 1,
         });
 
-      marker.on('click', (e) => {
-        if (isCoordPicking) {
-          // 坐标拾取模式：不打开卡片，而是拾取坐标
-          const { lat, lng } = e.latlng;
-          if (onMapClick) onMapClick({ lat, lng });
-        } else if (onMarkerClick) {
-          onMarkerClick(food);
-        }
+      marker.on('click', () => {
+        if (onMarkerClick) onMarkerClick(food);
       });
       marker.on('mouseover', () => {
         if (food.id !== selectedId) {
@@ -110,46 +103,7 @@ function MapView({ data, onMarkerClick, onMapClick, isCoordPicking, selectedId }
 
       markersRef.current[food.id] = marker;
     });
-  }, [data, selectedId, onMarkerClick, isCoordPicking, onMapClick]);
-
-  // 坐标拾取模式
-  useEffect(() => {
-    const map = mapInstanceRef.current;
-    if (!map) return;
-
-    if (isCoordPicking) {
-      map.getContainer().style.cursor = 'crosshair';
-
-      const handleClick = (e) => {
-        if (onMapClick) {
-          onMapClick({ lat: e.latlng.lat, lng: e.latlng.lng });
-        }
-        // 显示临时十字标记
-        if (cursorMarkerRef.current) {
-          map.removeLayer(cursorMarkerRef.current);
-        }
-        const icon = L.divIcon({
-          html: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="#8DA090" opacity="0.6"/><circle cx="12" cy="12" r="1" fill="#8DA090"/></svg>`,
-          className: 'cursor-marker',
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
-        });
-        cursorMarkerRef.current = L.marker(e.latlng, { icon, interactive: false }).addTo(map);
-      };
-
-      map.on('click', handleClick);
-      return () => {
-        map.off('click', handleClick);
-        map.getContainer().style.cursor = '';
-      };
-    } else {
-      map.getContainer().style.cursor = '';
-      if (cursorMarkerRef.current) {
-        map.removeLayer(cursorMarkerRef.current);
-        cursorMarkerRef.current = null;
-      }
-    }
-  }, [isCoordPicking, onMapClick]);
+  }, [data, selectedId, onMarkerClick]);
 
   // 选中时更新图标和视角
   useEffect(() => {
