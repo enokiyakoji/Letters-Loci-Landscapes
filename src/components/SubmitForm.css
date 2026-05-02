@@ -84,18 +84,21 @@
 
 .submit-panel-row {
   display: flex;
-  gap: 10px;
+  flex-wrap: nowrap;
+  gap: 12px;
 }
 
 .submit-panel-row > .submit-panel-field {
-  flex: 1;
+  flex: 1 1 0%;
   min-width: 0;
+  overflow: hidden;
 }
 
 .submit-panel-field {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  min-width: 0;
 }
 
 .submit-panel-field label {
@@ -108,7 +111,11 @@
 
 .submit-panel-field input,
 .submit-panel-field textarea {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 9px 12px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-sm);
