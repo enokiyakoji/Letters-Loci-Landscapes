@@ -15,9 +15,6 @@
   position: relative;
   width: 100%;
   max-width: 480px;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 32px 28px 28px;
   border-radius: var(--radius-lg);
   background: rgba(253, 251, 247, 0.95);
   backdrop-filter: blur(24px) saturate(110%);
@@ -25,6 +22,12 @@
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: var(--shadow-float);
   animation: submit-card-in 0.4s var(--ease-spring);
+}
+
+.submit-scroll {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px 28px 28px;
 }
 
 @keyframes submit-card-in {
@@ -194,6 +197,9 @@
 @media (max-width: 640px) {
   .submit-card {
     max-width: 100%;
+  }
+
+  .submit-scroll {
     padding: 24px 18px 20px;
   }
 

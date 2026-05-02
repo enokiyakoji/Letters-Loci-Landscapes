@@ -21,20 +21,30 @@
   position: relative;
   width: 100%;
   max-width: 420px;
-  max-height: 62vh;
   margin: 0 16px 32px;
-  padding: 28px 28px 24px;
   border-radius: var(--radius-lg);
   background: rgba(253, 251, 247, 0.82);
   backdrop-filter: blur(24px) saturate(110%);
   -webkit-backdrop-filter: blur(24px) saturate(110%);
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: var(--shadow-float);
-  overflow-y: auto;
-  overflow-x: hidden;
   transform: translateY(24px) scale(0.96);
   transition: transform 0.45s var(--ease-spring), opacity 0.35s var(--ease-out);
   opacity: 0;
+}
+
+/* 滚动容器与 backdrop-filter 分离，避免 WebKit 渲染 bug */
+.card-scroll {
+  max-height: 62vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 28px 28px 24px;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .card {
+    background: rgba(253, 251, 247, 0.95);
+  }
 }
 
 .card--visible {
@@ -177,8 +187,11 @@
   .card {
     max-width: 100%;
     margin: 0 12px 24px;
-    padding: 24px 20px 20px;
+  }
+
+  .card-scroll {
     max-height: 55vh;
+    padding: 24px 20px 20px;
   }
 
   .card-food {

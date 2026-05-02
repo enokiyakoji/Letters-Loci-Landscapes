@@ -78,8 +78,9 @@ function SubmitForm({ isOpen, onClose, pickedCoords }) {
           </svg>
         </button>
 
-        <h2 className="submit-title">贡献美食记忆</h2>
-        <p className="submit-desc">分享您读到的文学美食，通过审核后将出现在地图上</p>
+        <div className="submit-scroll">
+          <h2 className="submit-title">贡献美食记忆</h2>
+          <p className="submit-desc">分享您读到的文学美食，通过审核后将出现在地图上</p>
 
         {status === 'success' ? (
           <div className="submit-success">
@@ -150,6 +151,7 @@ function SubmitForm({ isOpen, onClose, pickedCoords }) {
             </button>
           </form>
         )}
+        </div>
       </div>
     </div>
   );

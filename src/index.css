@@ -20,8 +20,8 @@
   --color-shadow: rgba(0, 0, 0, 0.06);
 
   /* 字体 */
-  --font-display: 'Playfair Display', 'Noto Serif SC', serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', serif;
+  --font-body: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', system-ui, -apple-system, sans-serif;
 
   /* 圆角 */
   --radius-sm: 6px;
